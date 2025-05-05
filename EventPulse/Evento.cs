@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvenPulse
+namespace EventPulse
 {
     public class Evento
     {
@@ -77,6 +77,16 @@ namespace EvenPulse
                 Validaciones.Cadena(value, "Nombre de la Empresa");
                 _empresa = value;
             }
+        }
+        public Evento (string nombre, string descripcion, DateTime fechaInicio, DateTime fechaFinalizacion, string tipoEvento, int presupuesto, string nombreEmpresa)
+        {
+            Nombre = nombre;
+            Descripcion = descripcion;
+            FechaInicio = fechaInicio;
+            FechaFinalizacion = fechaFinalizacion;
+            TipoEvento = tipoEvento;
+            Presupuesto = presupuesto;
+            NombreEmpresa = nombreEmpresa;
         }
     }
 }

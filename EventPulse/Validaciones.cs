@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvenPulse
+namespace EventPulse
 {
     public static class Validaciones
     {

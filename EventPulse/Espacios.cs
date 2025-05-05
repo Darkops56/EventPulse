@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvenPulse
+namespace EventPulse
 {
     public class Espacios
     {
@@ -49,7 +49,7 @@ namespace EvenPulse
                 _salasDis  = value;
             }
         }
-        public string EquipamientoTenico
+        public string EquipamientoTecnico
         {
             get { return _equipamiento;}
             set
@@ -63,6 +63,14 @@ namespace EvenPulse
                     _equipamiento = value;
                 }
             }
+        }
+        public Espacios (string sala, string direccion, int capacidad, int salasDisponibles, string equipamientoTecnico)
+        {
+            NombreSala = sala;
+            Direccion = direccion;
+            Capacidad = capacidad;
+            SalasDisponibles = salasDisponibles;
+            EquipamientoTecnico = equipamientoTecnico;
         }
     }
 }

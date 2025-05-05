@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvenPulse
+namespace EventPulse
 {
-    public class Oradores
+    public class Inscripcion
     {
         
     }
