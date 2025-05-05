@@ -1,5 +1,6 @@
-# EvenPulse 
-## Proyecto de laboratorio
+
+# Proyecto de laboratorio "EvenPulse" 
+
 
 ███████ ██    ██ ███████ ███    ██ ████████ ██████  ██    ██ ██      ███████ ███████ 
 ██      ██    ██ ██      ████   ██    ██    ██   ██ ██    ██ ██      ██      ██      
@@ -7,19 +8,20 @@
 ██       ██  ██  ██      ██  ██ ██    ██    ██      ██    ██ ██           ██ ██      
 ███████   ████   ███████ ██   ████    ██    ██       ██████  ███████ ███████ ███████ 
                                                                                      
-                                                                           
-## Descripción
+                                                                                    
+
+## Información.
 
 **EvenPulse** es una aplicación en consola desarrollada en C# para la gestión de eventos. Permite administrar oradores, asistentes, inscripciones y espacios de manera sencilla y organizada.
 
-## Características
+## Características del proyecto. 
 
 - Registro de oradores y asistentes
 - Gestión de eventos y espacios
 - Sistema de inscripción para los eventos
 - Validaciones básicas de datos
  
-## Estructura del proyecto
+## Estructura del proyecto.
 
 El proyecto contiene las siguientes clases principales:
 
@@ -30,7 +32,7 @@ El proyecto contiene las siguientes clases principales:
 - `Espacios`: Define los lugares donde se desarrollan los eventos.
 - `Validaciones`: Clase destinada a manejar reglas de validación de datos.
 
-## Instalación y ejecución
+## Instalación y ejecución del mismo. 
 
 1. Cloná este repositorio:
 
