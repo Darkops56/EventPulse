@@ -1,31 +1,28 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace EventPulse
 {
     public static class Validaciones
     {
-        public static string Cadena (string Cadena, string error)
+        private static readonly Regex EmailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+
+        public static void Cadena(string valor, string err)
         {
-            if (string.IsNullOrEmpty (Cadena))
-            {
-                throw new ArgumentException ($"La Cadena ingresa es invalida en: {error}");
-            } else
-            {
-                return Cadena;
-            }
+            if (string.IsNullOrWhiteSpace(valor))
+                throw new ArgumentException($"La cadena no es válida: {err}");
         }
-        public static int Negativo (int cantidad, string error)
+
+        public static void Email(string email)
         {
-            if (cantidad < 0)
-            {
-                throw new Exception($"La cantidad ingresada no puede ser negativa: {error}");
-            } else
-            {
-                return cantidad;
-            }
+            if (!EmailRegex.IsMatch(email))
+                throw new ArgumentException($"Email inválido: {email}");
+        }
+
+        public static void Fechas(DateTime inicio, DateTime fin)
+        {
+            if (fin < inicio)
+                throw new ArgumentException("La fecha de fin debe ser posterior a la fecha de inicio.");
         }
     }
 }

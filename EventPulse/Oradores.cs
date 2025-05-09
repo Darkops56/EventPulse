@@ -1,43 +1,37 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace EventPulse
 {
-    public class Oradores
+    public class Orador
     {
-        public string NombreCompleto;
-        public string Especialidad;
-        public string Empresa;
-        public string email;
-        public bool requiereAlojamiento;
+        public string NombreCompleto { get; private set; }
+        public Evento.TipoEvento Experiencia { get; private set; }
+        public string Empresa { get; private set; }
+        public string Email { get; private set; }
+        public bool NecesitaAlojamiento { get; private set; }
 
-     public Oradores(string NombreCompleto,string Especialidad,string Empresa,string email,bool requiereAlojamiento){ 
-            this.NombreCompleto = NombreCompleto;
-            this.Especialidad = Especialidad;
-            this.Empresa = Empresa;
-            this.Empresa = Empresa;
-            NecesitaAlojamiento();
-            NoNecesitaAlojamiento();
-    } 
-    public void NecesitaAlojamiento ()
+        public Orador(string nombre, Evento.TipoEvento exp, string empresa, string email, bool aloj)
         {
-            if (requiereAlojamiento == true)
-        {
-               Console.WriteLine("Requiere de un alojamiento");
+            Validaciones.Cadena(nombre, "Orador.NombreCompleto");
+            Validaciones.Cadena(empresa, "Orador.Empresa");
+            Validaciones.Email(email);
+            NombreCompleto = nombre;
+            Experiencia = exp;
+            Empresa = empresa;
+            Email = email;
+            NecesitaAlojamiento = aloj;
+        }
 
-               requiereAlojamiento = false;
-        }
-        }
-        public void NoNecesitaAlojamiento ()
+        public static Orador CrearInteractivo()
         {
-            {
-            if (requiereAlojamiento == false)
-               Console.WriteLine("No necesita un alojamiento ");
-               
-               requiereAlojamiento = true;
-            }
+            Console.Write("Nombre completo: "); var nom = Console.ReadLine();
+            Console.WriteLine("Especialidad (1-Conferencia,2-Taller,3-Seminario,4-Feria): ");
+            var exp = (Evento.TipoEvento)(int.Parse(Console.ReadLine()) - 1);
+            Console.Write("Empresa: "); var emp = Console.ReadLine();
+            Console.Write("Email: "); var mail = Console.ReadLine();
+            Console.Write("Necesita alojamiento (s/n): "); var aloj = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            return new Orador(nom, exp, emp, mail, aloj);
         }
     }
 }

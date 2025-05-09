@@ -1,76 +1,31 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EventPulse
 {
-    public class Espacios
+    public class Espacio
     {
-        private string _espacios;
-        private string _direccion;
-        private int _capacidad;
-        private int _salasDis;
-        private string _equipamiento;
-        public Evento evento;
-        public string NombreSala
+        public string Nombre { get; private set; }
+        public string Direccion { get; private set; }
+        public int Capacidad { get; private set; }
+        public int SalasDisponibles { get; private set; }
+        public bool EquipoTecnico { get; private set; }
+
+        public Espacio(string nombre, string dir, int cap, int salas, bool equipo)
         {
-            get { return _espacios;}
-            set
-            {
-                Validaciones.Cadena(value, "El Nombre del Espacio");
-                _espacios = value;
-            }
+            Validaciones.Cadena(nombre, "Espacio.Nombre");
+            if (cap < 1) throw new ArgumentException("Capacidad debe >0");
+            if (salas < 1) throw new ArgumentException("Debe haber >=1 sala");
+            Nombre = nombre; Direccion = dir; Capacidad = cap; SalasDisponibles = salas; EquipoTecnico = equipo;
         }
-        public string Direccion 
+
+        public static Espacio CrearInteractivo()
         {
-            get { return _direccion;}
-            set 
-            {
-                Validaciones.Cadena(value, "La direccion de la Sala.");
-                _direccion = value;
-            }
-        }
-        public int Capacidad
-        {
-            get { return _capacidad;}
-            set
-            {
-                Validaciones.Negativo(value, "Capacidad del Espacio.");
-                _capacidad = value;
-            }
-        }
-        public int SalasDisponibles
-        {
-            get { return _salasDis;}
-            set 
-            {
-                Validaciones.Negativo(value, "Salas Disponibles");
-                _salasDis  = value;
-            }
-        }
-        public string EquipamientoTecnico
-        {
-            get { return _equipamiento;}
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    _equipamiento = "no hay equipamiento";
-                }
-                else
-                {
-                    _equipamiento = value;
-                }
-            }
-        }
-        public Espacios (string sala, string direccion, int capacidad, int salasDisponibles, string equipamientoTecnico)
-        {
-            NombreSala = sala;
-            Direccion = direccion;
-            Capacidad = capacidad;
-            SalasDisponibles = salasDisponibles;
-            EquipamientoTecnico = equipamientoTecnico;
+            Console.Write("Nombre del espacio: "); var nom = Console.ReadLine();
+            Console.Write("Dirección: "); var dir = Console.ReadLine();
+            Console.Write("Capacidad: "); var cap = int.Parse(Console.ReadLine());
+            Console.Write("Salas disponibles: "); var sal = int.Parse(Console.ReadLine());
+            Console.Write("Equipo técnico (s/n): "); var eq = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            return new Espacio(nom, dir, cap, sal, eq);
         }
     }
 }
