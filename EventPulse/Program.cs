@@ -1,115 +1,104 @@
-﻿using System;
-using System.Collections.Generic;
+using EventPulse;
+var eventos = new List<Evento>();
+bool salir = false;
 
-namespace EventPulse
+while (!salir)
 {
-    class Program
+    Console.WriteLine("=== Gestión de EventPulse ===");
+    Console.WriteLine("1. Crear Evento");
+    Console.WriteLine("2. Listar Eventos");
+    Console.WriteLine("3. Eliminar Evento");
+    Console.WriteLine("4. Añadir Orador a Evento");
+    Console.WriteLine("5. Añadir Asistente a Evento");
+    Console.WriteLine("6. Salir");
+    Console.Write("Seleccione una opción: ");
+    var opcion = Console.ReadLine();
+
+    try
     {
-        static void Main(string[] args)
+        switch (opcion)
         {
-            var eventos = new List<Evento>();
-            bool salir = false;
+            case "1":
+                var nuevoEvento = Evento.CrearInteractivo();
+                eventos.Add(nuevoEvento);
+                Console.WriteLine("Evento creado correctamente.");
+                break;
 
-            while (!salir)
-            {
-                Console.WriteLine("=== Gestión de EventPulse ===");
-                Console.WriteLine("1. Crear Evento");
-                Console.WriteLine("2. Listar Eventos");
-                Console.WriteLine("3. Eliminar Evento");
-                Console.WriteLine("4. Añadir Orador a Evento");
-                Console.WriteLine("5. Añadir Asistente a Evento");
-                Console.WriteLine("6. Salir");
-                Console.Write("Seleccione una opción: ");
-                var opcion = Console.ReadLine();
-
-                try
+            case "2":
+                if (eventos.Count == 0)
                 {
-                    switch (opcion)
-                    {
-                        case "1":
-                            var nuevoEvento = Evento.CrearInteractivo();
-                            eventos.Add(nuevoEvento);
-                            Console.WriteLine("Evento creado correctamente.");
-                            break;
-
-                        case "2":
-                            if (eventos.Count == 0)
-                            {
-                                Console.WriteLine("No hay eventos disponibles.");
-                                Console.WriteLine("Presione cualquier tecla para continuar...");
-                                Console.ReadKey();
-                                break;
-                            }
-                            eventos.ForEach(e => Console.WriteLine(e));
-                            Console.WriteLine("Presione cualquier tecla para continuar...");
-                            Console.ReadKey();
-                            break;
-
-                        case "3":
-                            if (eventos.Count == 0)
-                            {
-                                Console.WriteLine("No hay eventos para eliminar.");
-                                Console.WriteLine("Presione cualquier tecla para continuar...");
-                                Console.ReadKey();
-                                break;
-                            }
-                            Console.WriteLine("Eventos disponibles:");
-                            eventos.ForEach(e => Console.WriteLine($"- {e.Nombre}"));
-                            Console.Write("Nombre del evento a eliminar: ");
-                            var nombre = Console.ReadLine();
-                            var eliminados = eventos.RemoveAll(e => e.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
-                            if (eliminados > 0)
-                                Console.WriteLine("Evento(s) eliminado(s).");
-                            else
-                                Console.WriteLine("No se encontró ningún evento con ese nombre.");
-                            Console.WriteLine("Presione cualquier tecla para continuar...");
-                            Console.ReadKey();
-                            break;
-
-                        case "4":
-                            Console.Write("Nombre del evento: ");
-                            var nombreOr = Console.ReadLine();
-                            var ev = eventos.Find(e => e.Nombre.Equals(nombreOr, StringComparison.OrdinalIgnoreCase));
-                            if (ev != null)
-                            {
-                                var orador = Orador.CrearInteractivo();
-                                ev.AgregarOrador(orador);
-                                Console.WriteLine("Orador añadido.");
-                            }
-                            else Console.WriteLine("Evento no encontrado.");
-                            break;
-
-                        case "5":
-                            Console.Write("Nombre del evento: ");
-                            var nombreAs = Console.ReadLine();
-                            ev = eventos.Find(e => e.Nombre.Equals(nombreAs, StringComparison.OrdinalIgnoreCase));
-                            if (ev != null)
-                            {
-                                var asistente = Asistentes.CrearInteractivo();
-                                ev.RegistrarAsistente(asistente);
-                                Console.WriteLine("Asistente registrado.");
-                            }
-                            else Console.WriteLine("Evento no encontrado.");
-                            break;
-
-                        case "6":
-                            salir = true;
-                            break;
-
-                        default:
-                            Console.WriteLine("Opción inválida.");
-                            break;
-                    }
+                    Console.WriteLine("No hay eventos disponibles.");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    break;
                 }
-                catch (ArgumentException ex)
+                eventos.ForEach(e => Console.WriteLine(e));
+                Console.WriteLine("Presione cualquier tecla para continuar...");
+                Console.ReadKey();
+                break;
+
+            case "3":
+                if (eventos.Count == 0)
                 {
-                    Console.WriteLine($"Error de validación: {ex.Message}");
+                    Console.WriteLine("No hay eventos para eliminar.");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    break;
                 }
-                catch (Exception ex)
+                Console.WriteLine("Eventos disponibles:");
+                eventos.ForEach(e => Console.WriteLine($"- {e.Nombre}"));
+                Console.Write("Nombre del evento a eliminar: ");
+                var nombre = Console.ReadLine();
+                var eliminados = eventos.RemoveAll(e => e.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+                if (eliminados > 0)
+                    Console.WriteLine("Evento(s) eliminado(s).");
+                else
+                    Console.WriteLine("No se encontró ningún evento con ese nombre.");
+                Console.WriteLine("Presione cualquier tecla para continuar...");
+                Console.ReadKey();
+                break;
+
+            case "4":
+                Console.Write("Nombre del evento: ");
+                var nombreOr = Console.ReadLine();
+                var ev = eventos.Find(e => e.Nombre.Equals(nombreOr, StringComparison.OrdinalIgnoreCase));
+                if (ev != null)
                 {
-                    Console.WriteLine($"Error inesperado: {ex.Message}");
+                    var orador = Orador.CrearInteractivo();
+                    ev.AgregarOrador(orador);
+                    Console.WriteLine("Orador añadido.");
                 }
-            }
+                else Console.WriteLine("Evento no encontrado.");
+                break;
+
+            case "5":
+                Console.Write("Nombre del evento: ");
+                var nombreAs = Console.ReadLine();
+                ev = eventos.Find(e => e.Nombre.Equals(nombreAs, StringComparison.OrdinalIgnoreCase));
+                if (ev != null)
+                {
+                    var asistente = Asistentes.CrearInteractivo();
+                    ev.RegistrarAsistente(asistente);
+                    Console.WriteLine("Asistente registrado.");
+                }
+                else Console.WriteLine("Evento no encontrado.");
+                break;
+
+            case "6":
+                salir = true;
+                break;
+
+            default:
+                Console.WriteLine("Opción inválida.");
+                break;
         }
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine($"Error de validación: {ex.Message}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error inesperado: {ex.Message}");
     }
 }
