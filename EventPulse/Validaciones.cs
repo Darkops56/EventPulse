@@ -37,6 +37,7 @@ namespace EventPulse
         public static void ValidarMail (string email)
         {
             if (string.IsNullOrEmpty(email))
+            
             string inicio = email.Substring(0, email.LastIndexOf("@")).Trim();
             string medio = email.Substring(email.LastIndexOf('@') + 1, email.LastIndexOf('.') - email.LastIndexOf('@') - 1).Trim();
             string final = email.Substring(email.LastIndexOf('.'), email.Length - email.LastIndexOf('.')).Trim();
@@ -57,5 +58,7 @@ namespace EventPulse
             if (_fechaI > _fechaF)
                 throw new ArgumentException ("La fecha de inicio no puede ser menor a la de final");
         }
-        public static void ValidarCapacidad ()
+        public static void ValidarCapacidad ();
+    }
+
 }
