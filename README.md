@@ -1,5 +1,5 @@
 
-# Proyecto de laboratorio "EvenPulse" 
+# Proyecto de laboratorio "EventPulse" 
 
 
 ███████ ██    ██ ███████ ███    ██ ████████ ██████  ██    ██ ██      ███████ ████
@@ -12,7 +12,7 @@
                             
 ## Información.
 
-**EvenPulse** es una aplicación en consola desarrollada en C# para la gestión de eventos. Permite administrar oradores, asistentes, inscripciones y espacios de manera sencilla y organizada.
+**EventPulse** es una aplicación en consola desarrollada en C# para la gestión de eventos. Permite administrar oradores, asistentes, inscripciones y espacios de manera sencilla y organizada.
 
 ## Características del proyecto. 
 
@@ -38,4 +38,4 @@ El proyecto contiene las siguientes clases principales:
 
 ```bash
 git clone https://github.com/Darkops56/EventPulse/blob/main/EvenPulse/Program.cs
-cd evenpulse
+cd eventpulse
