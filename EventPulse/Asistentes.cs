@@ -1,6 +1,3 @@
-using System;
-using System.Text.RegularExpressions;
-
 namespace EventPulse
 {
     public class Asistentes
@@ -25,6 +22,7 @@ namespace EventPulse
             Console.Write("Teléfono: "); var tel = Console.ReadLine();
             Console.Write("Empresa: "); var emp = Console.ReadLine();
             Console.Write("Necesita certificado (s/n): "); var cert = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            Console.Clear();
             return new Asistentes(nom, mail, tel, emp, cert);
         }
     }

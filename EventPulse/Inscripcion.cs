@@ -1,5 +1,3 @@
-using System;
-
 namespace EventPulse
 {
     public class Inscripcion

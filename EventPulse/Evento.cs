@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace EventPulse
 {
     public class Evento
@@ -59,7 +56,7 @@ namespace EventPulse
                 evento.AgregarEspacio(esp);
                 Console.WriteLine("¿Agregar otro espacio? (s/n)");
             }
-
+            Console.Clear();
             return evento;
         }
 

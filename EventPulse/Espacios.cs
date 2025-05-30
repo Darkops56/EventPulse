@@ -1,5 +1,3 @@
-using System;
-
 namespace EventPulse
 {
     public class Espacio
@@ -25,6 +23,7 @@ namespace EventPulse
             Console.Write("Capacidad: "); var cap = int.Parse(Console.ReadLine());
             Console.Write("Salas disponibles: "); var sal = int.Parse(Console.ReadLine());
             Console.Write("Equipo técnico (s/n): "); var eq = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            Console.Clear();
             return new Espacio(nom, dir, cap, sal, eq);
         }
     }

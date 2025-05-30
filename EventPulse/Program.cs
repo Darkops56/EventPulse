@@ -2,6 +2,8 @@ using EventPulse;
 var eventos = new List<Evento>();
 bool salir = false;
 
+
+Console.Clear();
 while (!salir)
 {
     Console.WriteLine("=== Gestión de EventPulse ===");
@@ -19,30 +21,36 @@ while (!salir)
         switch (opcion)
         {
             case "1":
+                Console.Clear();
                 var nuevoEvento = Evento.CrearInteractivo();
                 eventos.Add(nuevoEvento);
                 Console.WriteLine("Evento creado correctamente.");
                 break;
 
             case "2":
+                Console.Clear();
                 if (eventos.Count == 0)
                 {
                     Console.WriteLine("No hay eventos disponibles.");
                     Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
+                    Console.Clear();
                     break;
                 }
                 eventos.ForEach(e => Console.WriteLine(e));
                 Console.WriteLine("Presione cualquier tecla para continuar...");
                 Console.ReadKey();
+                Console.Clear();
                 break;
 
             case "3":
+                Console.Clear();
                 if (eventos.Count == 0)
                 {
                     Console.WriteLine("No hay eventos para eliminar.");
                     Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
+                    Console.Clear();
                     break;
                 }
                 Console.WriteLine("Eventos disponibles:");
@@ -56,9 +64,11 @@ while (!salir)
                     Console.WriteLine("No se encontró ningún evento con ese nombre.");
                 Console.WriteLine("Presione cualquier tecla para continuar...");
                 Console.ReadKey();
+                Console.Clear();
                 break;
 
             case "4":
+                Console.Clear();
                 Console.Write("Nombre del evento: ");
                 var nombreOr = Console.ReadLine();
                 var ev = eventos.Find(e => e.Nombre.Equals(nombreOr, StringComparison.OrdinalIgnoreCase));
@@ -69,9 +79,11 @@ while (!salir)
                     Console.WriteLine("Orador añadido.");
                 }
                 else Console.WriteLine("Evento no encontrado.");
+                Console.Clear();
                 break;
 
             case "5":
+                Console.Clear();
                 Console.Write("Nombre del evento: ");
                 var nombreAs = Console.ReadLine();
                 ev = eventos.Find(e => e.Nombre.Equals(nombreAs, StringComparison.OrdinalIgnoreCase));
@@ -82,14 +94,17 @@ while (!salir)
                     Console.WriteLine("Asistente registrado.");
                 }
                 else Console.WriteLine("Evento no encontrado.");
+                Console.Clear();
                 break;
 
             case "6":
+                Console.Clear();
                 salir = true;
                 break;
 
             default:
                 Console.WriteLine("Opción inválida.");
+                Console.Clear();
                 break;
         }
     }

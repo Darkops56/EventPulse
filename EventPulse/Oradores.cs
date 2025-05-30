@@ -31,7 +31,9 @@ namespace EventPulse
             Console.Write("Empresa: "); var emp = Console.ReadLine();
             Console.Write("Email: "); var mail = Console.ReadLine();
             Console.Write("Necesita alojamiento (s/n): "); var aloj = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            Console.Clear();
             return new Orador(nom, exp, emp, mail, aloj);
+            
         }
     }
 }
