@@ -25,5 +25,6 @@ namespace EventPulse
             Console.Clear();
             return new Asistentes(nom, mail, tel, emp, cert);
         }
+       
     }
 }
