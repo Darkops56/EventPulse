@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace EventPulse
+namespace Eventos
 {
     public class Orador
     {

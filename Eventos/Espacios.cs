@@ -1,4 +1,4 @@
-namespace EventPulse
+namespace Eventos
 {
     public class Espacio
     {

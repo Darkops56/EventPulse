@@ -1,4 +1,5 @@
-using EventPulse;
+﻿using Eventos;
+
 var eventos = new List<Evento>();
 bool salir = false;
 
