@@ -17,11 +17,13 @@ namespace EventPulse
 
         public static Asistentes CrearInteractivo()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Nombre completo: "); var nom = Console.ReadLine();
             Console.Write("Email: "); var mail = Console.ReadLine();
             Console.Write("Teléfono: "); var tel = Console.ReadLine();
             Console.Write("Empresa: "); var emp = Console.ReadLine();
             Console.Write("Necesita certificado (s/n): "); var cert = Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase);
+            Console.ResetColor();
             Console.Clear();
             return new Asistentes(nom, mail, tel, emp, cert);
         }
