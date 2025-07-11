@@ -30,8 +30,8 @@ while (!salir)
                 var nuevoEvento = Evento.CrearInteractivo();
                 eventos.Add(nuevoEvento);
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine("Evento creado correctamente.");
                 Console.ResetColor();
+                Console.Clear();
                 break;
 
             case "2":
@@ -122,6 +122,7 @@ while (!salir)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     var asistente = Asistentes.CrearInteractivo();
+                    Console.ResetColor();
                     try
                     {
                         ev.RegistrarAsistente(asistente);
@@ -137,8 +138,12 @@ while (!salir)
                     Console.ReadKey();
 
                 }
-                else Console.WriteLine("Evento no encontrado.");
-                Console.ResetColor();
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Evento no encontrado.");
+                    Console.ResetColor();
+                } 
                 Console.Clear();
                 break;
             case "6":

@@ -60,11 +60,10 @@ namespace EventPulse
                 Console.ResetColor();
                 conteo += 1;
             }
-            if (conteo == 0)
+            while(conteo == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Debe tener un espacio el evento.");
-                Console.ReadKey();
                 Console.WriteLine("¿Agregar espacios? (s/n)");
                 Console.ResetColor();
                 while (Console.ReadLine().Equals("s", StringComparison.OrdinalIgnoreCase))
