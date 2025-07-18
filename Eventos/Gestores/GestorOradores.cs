@@ -38,29 +38,48 @@ namespace Gestores
             Console.WriteLine("Orador creado.");
         }
 
-        public static void ListarDesdeConsola()
+        public static bool ListarDesdeConsola()
         {
             if (!oradores.Any())
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("No hay oradores.");
+                Console.ResetColor();
                 Console.ReadKey();
-                return;
+                return false;
             }
 
             foreach (var o in oradores)
                 Console.WriteLine(o);
+
+            return true;        
         }
 
         public static void EliminarDesdeConsola()
         {
-            ListarDesdeConsola();
+            if (oradores.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("No hay eventos para que puedas eliminar.");
+                Console.ResetColor();
+                Console.ReadKey();
+                return;
+            }
             Console.Write("Nombre del orador: ");
             var nombre = Console.ReadLine();
             var orador = oradores.FirstOrDefault(o => o.NombreCompleto.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if (orador == null)
-                throw new Exception("Orador no encontrado.");
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Orador no encontrado.");
+                Console.ResetColor();
+                Console.ReadKey();
+                return;
+            }
             oradores.Remove(orador);
             Console.WriteLine("Orador eliminado.");
+            Console.ReadKey();
+            return;
         }
 
         public static List<Orador> ListarOradores() => new(oradores);

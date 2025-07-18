@@ -7,6 +7,7 @@ namespace Gestores
 
         public static void CrearDesdeConsola()
         {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.Write("Nombre: ");
             var nombre = Console.ReadLine();
             Console.Write("Dirección: ");
@@ -20,31 +21,54 @@ namespace Gestores
 
             espacios.Add(new Espacio(nombre, direccion, capacidad, salas, tecnico));
             Console.WriteLine("Espacio creado.");
+            Console.ResetColor();
         }
 
-        public static void ListarDesdeConsola()
+        public static bool ListarDesdeConsola()
         {
             if (!espacios.Any())
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("No hay espacios.");
+                Console.ResetColor();
                 Console.ReadKey();
-                return;
+                return false;
             }
 
             foreach (var e in espacios)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine(e);
+                Console.ResetColor();
+            }
+            return true;
         }
 
         public static void EliminarDesdeConsola()
         {
-            ListarDesdeConsola();
+            if (espacios.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("No hay espacios para que puedas eliminar.");
+                Console.ResetColor();
+                Console.ReadKey();
+                return;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.Write("Nombre del espacio: ");
             var nombre = Console.ReadLine();
             var espacio = espacios.FirstOrDefault(e => e.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if (espacio == null)
-                throw new Exception("Espacio no encontrado.");
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Espacio no encontrado.");
+                Console.ResetColor();
+            }
             espacios.Remove(espacio);
             Console.WriteLine("Espacio eliminado.");
+            Console.ResetColor();
+            Console.ReadKey();
+            return;
         }
 
         public static List<Espacio> ListarTodos() => new(espacios);

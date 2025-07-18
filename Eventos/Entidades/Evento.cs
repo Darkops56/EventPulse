@@ -1,5 +1,6 @@
 using Utilidades;
 using Inscripciones;
+using Personas;
 namespace Entidades
 {
     public abstract class Evento
@@ -12,6 +13,8 @@ namespace Entidades
         public decimal Presupuesto { get; private set; }
         public List<Inscripcion> Inscripciones { get; private set; } = new();
         public List<Espacio> EspaciosAsignados { get; private set; } = new();
+        public List<Orador> Oradores { get; private set; } = new();
+        public List<Asistentes> Asistentes { get; private set; } = new();
 
         public Evento(string nombre, string descripcion, DateTime fechaInicio, DateTime fechaFin, string cliente, decimal presupuesto)
         {
@@ -37,7 +40,17 @@ namespace Entidades
                 EspaciosAsignados.Add(espacio);
             }
         }
+        public void AsignarOrador(Orador orador)
+        {
+            if (!Oradores.Contains(orador))
+                Oradores.Add(orador);
+        }
 
+        public void AsignarAsistente(Asistentes asistente)
+        {
+            if (!Asistentes.Contains(asistente))
+                Asistentes.Add(asistente);
+        }
         public void AgregarInscripcion(Inscripcion inscripcion)
         {
             int capacidadTotal = EspaciosAsignados.Sum(e => e.CapacidadMaxima);

@@ -1,6 +1,8 @@
 using Entidades;
 using Inscripciones;
 using Utilidades;
+using Personas;
+using System.Data;
 namespace Gestores
 {
     public static class GestorEventos
@@ -40,24 +42,31 @@ namespace Gestores
             Console.ReadKey();
         }
 
-        public static void ListarDesdeConsola()
+        public static bool ListarDesdeConsola()
         {
             if (eventos.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("No hay eventos.");
+                Console.ResetColor();
                 Console.ReadKey();
-                return;
+                return false;
             }
 
             foreach (var e in eventos)
                 Console.WriteLine(e);
+
+
+            return true;
         }
 
         public static void EliminarDesdeConsola()
         {
             if (eventos.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("No hay eventos para que puedas eliminar.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
@@ -65,42 +74,56 @@ namespace Gestores
             var nombre = Console.ReadLine();
             var evento = eventos.FirstOrDefault(e => e.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if (evento == null)
-                throw new Exception("Evento no encontrado.");
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Evento no encontrado.");
+                Console.ResetColor();
+            }
             eventos.Remove(evento);
             Console.WriteLine("Evento eliminado.");
         }
         public static void RegistrarInscripcionDesdeConsola()
         {
+
             if (eventos.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("No hay eventos para que puedas eliminar.");
                 Console.ReadKey();
                 return;
             }
             foreach (var e in eventos)
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine($"{e.Tipo}: {e.Nombre}, {e.Descripcion}, {e.FechaInicio}, {e.FechaFin}, {e.Cliente}, {e.Presupuesto}");
+                Console.ResetColor();
             }
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.Write("Nombre del evento: ");
             var nombreEvento = Console.ReadLine();
             var evento = eventos.FirstOrDefault(e => e.Nombre.Equals(nombreEvento, StringComparison.OrdinalIgnoreCase));
 
             if (evento == null)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Evento no encontrado.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
 
             if (!evento.EspaciosAsignados.Any())
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine(" Este evento no tiene espacios asignados. No se puede registrar asistencia.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
 
-            GestorAsistentes.ListarDesdeConsola();
-            
+            if (!GestorAsistentes.ListarDesdeConsola())
+                return;
+
             Console.Write("Nombre del asistente: ");
             var nombreAsistente = Console.ReadLine();
             var asistente = GestorAsistentes.ListarTodos()
@@ -108,14 +131,18 @@ namespace Gestores
 
             if (asistente == null)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Asistente no encontrado.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
 
             if (evento.Inscripciones.Any(i => i.Asistente == asistente))
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Este asistente ya está registrado en este evento.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
@@ -123,7 +150,9 @@ namespace Gestores
             int capacidad = evento.EspaciosAsignados.Sum(e => e.CapacidadMaxima);
             if (evento.Inscripciones.Count >= capacidad)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine(" Capacidad máxima alcanzada. No se puede registrar más asistentes.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
@@ -137,7 +166,9 @@ namespace Gestores
 
             if (!Enum.TryParse<EMetododePago>(metodoInput, true, out var metodoPagoSeleccionado))
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Método de pago no válido.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
@@ -150,7 +181,9 @@ namespace Gestores
 
             if (!Enum.TryParse<EEstado>(estadoInput, true, out var estadoSeleccionado))
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Estado no válido.");
+                Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
@@ -159,7 +192,63 @@ namespace Gestores
             evento.AgregarInscripcion(inscripcion);
 
             Console.WriteLine(" Inscripción registrada correctamente.");
+            Console.ResetColor();
             Console.ReadKey();
+            return;
+        }
+        public static void AsignarOrador(string nombreEvento, Orador orador)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Evento? evento = eventos.FirstOrDefault(e => e.Nombre.Equals(nombreEvento, StringComparison.OrdinalIgnoreCase));
+            if (evento == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("No se encontró el evento con ese nombre.");
+                Console.ResetColor();
+            }
+            Console.WriteLine("se añadio correctamente el orador");
+            evento.AsignarOrador(orador);
+            Console.ResetColor();
+        }
+
+        public static void AsignarAsistente(string nombreEvento, Asistentes asistente)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Evento? evento = eventos.FirstOrDefault(e => e.Nombre.Equals(nombreEvento, StringComparison.OrdinalIgnoreCase));
+            if (evento == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("No se encontró el evento con ese nombre.");
+                Console.ResetColor();
+            }
+
+            Console.WriteLine("se añadio correctamente el Asistente");
+            evento.AsignarAsistente(asistente);
+
+        }
+
+        public static void AsignarEspacio(string nombreEvento, Espacio espacio)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Evento? evento = eventos.FirstOrDefault(e => e.Nombre.Equals(nombreEvento, StringComparison.OrdinalIgnoreCase));
+            if (evento == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("No se encontró el evento con ese nombre.");
+                Console.ResetColor();
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("se añadio correctamente el Espacio");
+            evento.AsignarEspacio(espacio);
+            Console.ResetColor();
+            Console.ReadKey();
+            return;
+        }
+        public static Evento? ObtenerEvento(string nombre)
+        {
+            var evento = ListarEventos().FirstOrDefault(e => e.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            return evento;
         }
         public static List<Evento> ListarEventos() => new(eventos);
     }
