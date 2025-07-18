@@ -12,27 +12,51 @@
                             
 ## Información.
 
-**EventPulse** es una aplicación en consola desarrollada en C# para la gestión de eventos. Permite administrar oradores, asistentes, inscripciones y espacios de manera sencilla y organizada.
+# EventPulse
 
-## Características del proyecto. 
+**EventPulse** es una aplicación de consola desarrollada en C# para la gestión de eventos presenciales. Permite administrar conferencias, ferias y talleres, así como oradores, asistentes, espacios físicos, inscripciones y emisión de certificados.
 
-- Registro de oradores y asistentes
-- Gestión de eventos y espacios
-- Sistema de inscripción para los eventos
-- Validaciones básicas de datos
- 
-## Estructura del proyecto.
+## Características
 
-El proyecto contiene las siguientes clases principales:
+- Gestión de eventos:
+  - Crear, listar y eliminar eventos.
+  - Registrar inscripciones de asistentes.
+- Tipos de eventos:
+  - **Conferencia**: Asignación de espacios con prioridad a equipamiento técnico.
+  - **Taller**: Distribución de materiales y emisión de certificados.
+  - **Feria**: Generación de planos de organización.
+- Gestión de oradores y asistentes.
+- Administración de espacios físicos.
+- Emisión de certificados personalizados por evento.
 
-- `Evento`: Maneja los datos relacionados con los eventos.
-- `Oradores`: Representa a los ponentes de cada evento.
-- `Asistentes`: Representa a los participantes.
-- `Inscripcion`: Lógica para inscribir asistentes a eventos.
-- `Espacios`: Define los lugares donde se desarrollan los eventos.
-- `Validaciones`: Clase destinada a manejar reglas de validación de datos.
+  ## Ejecución
 
-## Instalación y ejecución del mismo. 
+### Requisitos
+
+- [.NET 6.0 SDK o superior](https://dotnet.microsoft.com/download)
+- Visual Studio o cualquier IDE compatible con .NET
+
+### Cómo correr el proyecto
+
+1. Clona o descarga este repositorio.
+2. Abre la solución `EventPulse.sln` en Visual Studio.
+3. Establece el proyecto `App` como proyecto de inicio.
+4. Ejecuta el proyecto (`F5` o `Ctrl + F5`).
+## Tecnologias
+  C#
+  .NET Console Application
+  Programación orientada a objetos
+  Arquitectura Modular
+  
+## Ejemplo de uso
+
+```plaintext
+> Gestionar Eventos
+  - Crear Evento
+  - Listar Eventos
+  - Registrar Inscripción
+  - Generar Plano de Feria
+  - Emitir Certificado
 
 1. Cloná este repositorio:
 
